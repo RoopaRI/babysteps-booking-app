@@ -1,0 +1,20 @@
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Adjust as needed */
+    background-image: url("https://img.freepik.com/premium-photo/female-doctor-writing-prescription-her-young-patient_109710-346.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+  }
+  
+  .hero-text {
+    background: rgba(0, 0, 0, 0.3); /* Optional: Adds a slight dark overlay for readability */
+    padding: 20px;
+    border-radius: 8px;
+  }
+  

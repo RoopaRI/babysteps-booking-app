@@ -1,0 +1,25 @@
+.marquee-container {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    background: #007bff;
+    color: white;
+    padding: 10px;
+    font-size: 18px;
+  }
+  
+  .marquee-container p {
+    display: inline-block;
+    animation: marquee-scroll 10s linear infinite;
+  }
+  
+  @keyframes marquee-scroll {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  
