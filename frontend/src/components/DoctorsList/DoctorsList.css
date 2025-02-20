@@ -1,0 +1,24 @@
+
+.doctor-image {
+    width: 100%; /* Makes the image responsive */
+    max-width: 180px; /* Default max width */
+    height: 150px; /* Fixed height */
+    object-fit: cover; /* Ensures image covers the given size without distortion */
+    border-radius: 10px;
+  }
+  
+  /* Adjust image size for larger screens */
+  @media (min-width: 768px) {
+    .doctor-image {
+      max-width: 200px;
+      height: 180px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .doctor-image {
+      max-width: 250px;
+      height: 200px;
+    }
+  }
+  
