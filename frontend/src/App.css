@@ -14,12 +14,12 @@
 }
 
 .App-header {
-  background-color: #7ad5ee;
+  background-color: #9ccdd8;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: center; 
   font-size: calc(10px + 2vmin);
   color: white;
 }

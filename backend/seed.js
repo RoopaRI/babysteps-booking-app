@@ -36,14 +36,14 @@ const seedDatabase = async () => {
             "name": "Dr. Catherine Lee", 
             "workingHours": { "start": "10:00", "end": "18:00" }, 
             "specialization": "Cardiologist",
-            "image": "https://images.pexels.com/photos/5452201/pexels-photo-5452201.jpeg",
+            "image": "https://images.pexels.com/photos/5452238/pexels-photo-5452238.jpeg",
             "interval": 30
           },
           { 
             "name": "Dr. Daniel Brown", 
             "workingHours": { "start": "07:30", "end": "15:30" }, 
             "specialization": "Dermatologist",
-            "image": "https://images.pexels.com/photos/8376227/pexels-photo-8376227.jpeg",
+            "image": "https://images.pexels.com/photos/6749772/pexels-photo-6749772.jpeg",
             "interval": 30
           },
           { 
@@ -57,7 +57,7 @@ const seedDatabase = async () => {
             "name": "Dr. Frank White", 
             "workingHours": { "start": "09:00", "end": "17:00" }, 
             "specialization": "Orthopedic Surgeon",
-            "image": "https://images.pexels.com/photos/8460153/pexels-photo-8460153.jpeg",
+            "image": "https://images.pexels.com/photos/3825584/pexels-photo-3825584.jpeg",
             "interval": 30
           },
           { 
@@ -78,7 +78,7 @@ const seedDatabase = async () => {
           "name": "Dr. Isaac Taylor", 
           "workingHours": { "start": "08:00", "end": "16:00" }, 
           "specialization": "Psychiatrist",
-          "image": "https://images.pexels.com/photos/7659576/pexels-photo-7659576.jpeg",
+          "image": "https://images.pexels.com/photos/4386468/pexels-photo-4386468.jpeg",
           "interval": 30
         },
         { 
@@ -99,7 +99,7 @@ const seedDatabase = async () => {
           "name": "Dr. Linda Harris", 
           "workingHours": { "start": "10:30", "end": "18:30" }, 
           "specialization": "Gynecologist",
-          "image": "https://images.pexels.com/photos/573306/pexels-photo-573306.jpeg",
+          "image": "https://images.pexels.com/photos/5452201/pexels-photo-5452201.jpeg",
           "interval": 30
         },
         { 
@@ -120,7 +120,7 @@ const seedDatabase = async () => {
           "name": "Dr. Oliver Scott", 
           "workingHours": { "start": "09:00", "end": "17:00" }, 
           "specialization": "Ophthalmologist",
-          "image": "https://images.pexels.com/photos/6974586/pexels-photo-6974586.jpeg",
+          "image": "https://images.pexels.com/photos/8376227/pexels-photo-8376227.jpeg",
           "interval": 30
         },
         { 
@@ -141,14 +141,14 @@ const seedDatabase = async () => {
           "name": "Dr. Rachel King", 
           "workingHours": { "start": "10:00", "end": "18:00" }, 
           "specialization": "Oncologist",
-          "image": "https://images.pexels.com/photos/6749772/pexels-photo-6749772.jpeg",
+          "image": "https://images.pexels.com/photos/3985166/pexels-photo-3985166.jpeg",
           "interval": 30
         },
         { 
           "name": "Dr. Samuel Baker", 
           "workingHours": { "start": "08:00", "end": "16:00" }, 
           "specialization": "Rheumatologist",
-          "image": "https://images.pexels.com/photos/8460149/pexels-photo-8460149.jpeg",
+          "image": "https://images.pexels.com/photos/3825586/pexels-photo-3825586.jpeg",
           "interval": 30
         },
         { 
