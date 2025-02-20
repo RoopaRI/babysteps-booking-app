@@ -1,7 +1,7 @@
 import './App.css';
 import Marquee from './components/Marquee/Marquee';
-import DoctorsList from './components/DoctorsList/DoctorsList';
 import HeroSection from './components/HeroSection/HeroSection';
+import Dashboard from './components/Dashboard/Dashboard';
 
 function App() {
 
@@ -10,8 +10,7 @@ function App() {
       <header className="App-header">
         <Marquee />
       <HeroSection />
-        <DoctorsList/>
-        
+        <Dashboard/>
       </header>
     </div>
   );
