@@ -18,11 +18,13 @@ mongoose.connect(process.env.MONGO_URI, {
   .then(() => console.log("✅ Connected to MongoDB Atlas"))
   .catch((error) => console.error("❌ MongoDB connection error:", error));
 
-// Import Routes
-const doctorRoutes = require("./routes/doctorRoutes");
 
-// Use Routes
+const doctorRoutes = require("./routes/doctorRoutes");
 app.use("/doctors", doctorRoutes);
+
+const appointmentRoutes = require("./routes/appointmentRoutes");
+app.use("/appointments", appointmentRoutes);
+
 
 // Test Route
 app.get("/", (req, res) => {
