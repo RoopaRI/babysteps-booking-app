@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Appointment = require("../models/Appointment");
+const Doctor = require("../models/Doctor");
 
 // Get all appointments
 router.get("/", async (req, res) => {
@@ -23,12 +24,18 @@ router.post("/", async (req, res) => {
       return res.status(400).json({ error: "All fields except notes are required." });
     }
 
+    // Validate if the doctor exists
+    const doctor = await Doctor.findById(doctorId);
+    if (!doctor) {
+    return res.status(404).json({ error: "Doctor not found" });
+    }
+
     // Convert date to proper format
     const appointmentDate = new Date(date);
 
     const newAppointment = new Appointment({
       doctorId,
-      date: appointmentDate, // Ensure date is stored properly
+      date: appointmentDate,
       duration,
       appointmentType,
       patientName,
@@ -37,7 +44,7 @@ router.post("/", async (req, res) => {
 
     await newAppointment.save();
     
-    console.log("✅ Appointment saved:", newAppointment); // Log for debugging
+    console.log("✅ Appointment saved:", newAppointment); 
     res.status(201).json({ message: "Appointment booked successfully!", appointment: newAppointment });
   } catch (error) {
     console.error("❌ Error booking appointment:", error);
