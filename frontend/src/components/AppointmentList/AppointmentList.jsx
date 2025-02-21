@@ -11,35 +11,73 @@ const AppointmentsList = () => {
     fetchAppointments();
   }, []);
 
-  const fetchAppointments = () => {
-    axios.get("http://localhost:5000/appointments")
-      .then((res) => {
-        setAppointments(res.data);
-        console.log("Fetched Appointments:", res.data); // Debugging
-      })
-      .catch(() => alert("Failed to fetch appointments"));
+  const fetchAppointments = async () => {
+    try {
+      const res = await axios.get("http://localhost:5000/appointments");
+      setAppointments(res.data);
+    } catch (error) {
+      alert("Failed to fetch appointments");
+    }
   };
 
-  const cancelAppointment = (id) => {
-    axios.delete(`http://localhost:5000/appointments/${id}`)
-      .then(() => {
-        alert("Appointment canceled!");
-        setAppointments(appointments.filter(appt => appt._id !== id));
-      })
-      .catch(() => alert("Failed to cancel appointment"));
+  const cancelAppointment = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/appointments/${id}`);
+      setAppointments((prev) => prev.filter((appt) => appt._id !== id));
+    } catch (error) {
+      alert("Failed to cancel appointment");
+    }
   };
 
-  const updateAppointment = (id) => {
-    axios.put(`http://localhost:5000/appointments/${id}`, {
-      date: updatedDate,
-      time: updatedTime
-    })
-      .then(() => {
-        alert("Appointment updated!");
-        setEditMode(null);
-        fetchAppointments();
-      })
-      .catch(() => alert("Failed to update appointment"));
+  const updateAppointment = async (id) => {
+    if (!updatedDate || !updatedTime) {
+      alert("Please select a valid date and time.");
+      return;
+    }
+
+    try {
+      const res = await axios.put(`http://localhost:5000/appointments/${id}`, {
+        date: updatedDate,
+        time: updatedTime,
+      });
+
+      alert(res.data.message);
+      setEditMode(null);
+
+      // Update state immediately instead of fetching all data again
+      setAppointments((prev) =>
+        prev.map((appt) =>
+          appt._id === id ? { ...appt, date: updatedDate, time: updatedTime } : appt
+        )
+      );
+    } catch (error) {
+      alert("Failed to update appointment");
+    }
+  };
+
+  const handleEditClick = (appointment) => {
+    setEditMode(appointment._id);
+    setUpdatedDate(new Date(appointment.date).toISOString().split("T")[0]); // Format YYYY-MM-DD
+    setUpdatedTime(appointment.time);
+  };
+
+  const handleCancelEdit = () => {
+    setEditMode(null);
+    setUpdatedDate("");
+    setUpdatedTime("");
+  };
+
+  // Generate time slots in 30-minute intervals
+  const generateTimeSlots = () => {
+    const slots = [];
+    let start = new Date();
+    start.setHours(0, 0, 0, 0); // Start at midnight
+
+    for (let i = 0; i < 48; i++) {
+      slots.push(start.toTimeString().slice(0, 5)); // Format HH:MM
+      start.setMinutes(start.getMinutes() + 30);
+    }
+    return slots;
   };
 
   return (
@@ -57,26 +95,34 @@ const AppointmentsList = () => {
                     type="date"
                     value={updatedDate}
                     onChange={(e) => setUpdatedDate(e.target.value)}
-                    className="form-control"
+                    className="form-control me-2"
                   />
-                  <input
-                    type="time"
+
+                  <select
+                    className="form-control me-2"
                     value={updatedTime}
                     onChange={(e) => setUpdatedTime(e.target.value)}
-                    className="form-control"
-                  />
-                  <button className="btn btn-success btn-sm" onClick={() => updateAppointment(appointment._id)}>
+                  >
+                    <option value="">Select Time</option>
+                    {generateTimeSlots().map((slot) => (
+                      <option key={slot} value={slot}>
+                        {slot}
+                      </option>
+                    ))}
+                  </select>
+
+                  <button className="btn btn-success btn-sm me-2" onClick={() => updateAppointment(appointment._id)}>
                     Save
                   </button>
-                  <button className="btn btn-secondary btn-sm" onClick={() => setEditMode(null)}>
+                  <button className="btn btn-secondary btn-sm" onClick={handleCancelEdit}>
                     Cancel
                   </button>
                 </>
               ) : (
                 <>
-                  <strong>{appointment.doctorId.name}</strong> - {appointment.date} at {appointment.time}
+                  <strong>{appointment.doctorId.name}</strong> - {new Date(appointment.date).toISOString().split("T")[0]} at {appointment.time}
                   <div>
-                    <button className="btn btn-warning btn-sm me-2" onClick={() => setEditMode(appointment._id)}>
+                    <button className="btn btn-warning btn-sm me-2" onClick={() => handleEditClick(appointment)}>
                       Edit
                     </button>
                     <button className="btn btn-danger btn-sm" onClick={() => cancelAppointment(appointment._id)}>
