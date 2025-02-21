@@ -123,3 +123,6 @@ npm start
 
 4️⃣ Try to edit/cancel an existing booking.
 
+---
+**Frontend**: [babysteps-booking-app.vercel.app](https://babysteps-booking-app.vercel.app)  
+**Backend**: [babysteps-booking-app.onrender.com](https://babysteps-booking-app.onrender.com)  
