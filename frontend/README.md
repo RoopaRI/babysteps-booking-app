@@ -37,17 +37,17 @@ npm install
 
 ### 🔹 Configure .env File
 Create a .env file in the backend folder and add:
-MONGO_URI=mongodb+srv://roopa31113:ro0par0h1t@babysteps.8oqmd.mongodb.net/bookings
+MONGO_URI=your_mongodb_connection_string
 PORT=5000
 
-### 🔹 Run Backend Server
+## 🔹 Run Backend Server
 node server.js
 # or
 npm run dev
 
 ✅ Backend will run at: http://localhost:5000/
 
-### 🎨 Frontend Setup  
+## 🎨 Frontend Setup  
 🔹 **Navigate to Frontend & Install Dependencies**  
 ```sh
 cd frontend
@@ -60,19 +60,19 @@ Edit
 npm start
 ✅ Frontend will run at: http://localhost:3000/
 
-### 📌 API Endpoints
-### 🔹 Doctors API
-Method	Endpoint	Description
-GET	/doctors	Fetch all doctors
-GET	/doctors/:id/slots?date=YYYY-MM-DD	Get available slots for a doctor
-### 🔹 Appointments API
-Method	Endpoint	Description
-GET	/appointments	Fetch all appointments
-POST	/appointments	Book an appointment
-PUT	/appointments/:id	Update appointment (date/time)
-DELETE	/appointments/:id	Cancel an appointment
+## 📌 API Endpoints
+## 🔹 Doctors API
+Method	            Endpoint	                                       Description
+GET	                /doctors	                                       Fetch all doctors
+GET	                /doctors/:id/slots?date=YYYY-MM-DD	               Get available slots for a doctor
+## 🔹 Appointments API
+Method	            Endpoint	                                       Description
+GET	                /appointments	                                   Fetch all appointments
+POST	            /appointments	                                   Book an appointment
+PUT	                /appointments/:id	                               Update appointment (date/time)
+DELETE	            /appointments/:id	                               Cancel an appointment
 
-### ⚡ Assumptions & Design Decisions
+## ⚡ Assumptions & Design Decisions
 1️⃣ Doctor Availability
 ✔️ Working hours are stored in MongoDB.
 ✔️ Time slots are generated dynamically based on the doctor’s availability and interval duration.
@@ -91,7 +91,7 @@ DELETE	/appointments/:id	Cancel an appointment
 5️⃣ Editable Appointments
 ✔️ Users can update both date & time for existing bookings.
 
-### 🔥 How to Test the Project?
+## 🔥 How to Test the Project?
 1️⃣ Run both backend & frontend.
 2️⃣ Open http://localhost:3000/ in your browser.
 3️⃣ Select a doctor → Choose a date → Pick a time slot → Book appointment.
