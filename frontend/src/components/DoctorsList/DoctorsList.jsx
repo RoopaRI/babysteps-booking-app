@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./DoctorsList.css";
 import DoctorCard from "../DoctorCard/DoctorCard";
 import BookingModal from "../BookingModal/BookingModal";
-import API_BASE_URL from "../config"; // Import API base URL
+import API_BASE_URL from "../../config"; // Import API base URL
 
 const DoctorsList = () => {
   const [doctors, setDoctors] = useState([]);
