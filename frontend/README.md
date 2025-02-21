@@ -37,16 +37,6 @@ git clone https://github.com/your-repo.git
 cd backend
 npm install
 ```
-
-## 🏗 Backend Setup  
-
-### 🔹 Clone Repository & Install Dependencies  
-```sh
-git clone https://github.com/your-repo.git
-cd backend
-npm install
-```
-
 ---
 
 ### 🔹 Configure .env File
@@ -63,8 +53,8 @@ PORT=5000
 node server.js
 # or
 npm run dev
-✅ Backend will run at: http://localhost:5000/
 ```
+✅ Backend will run at: http://localhost:5000/
 
 ---
 
@@ -126,6 +116,10 @@ npm start
 ---
 # 🔥 How to Test the Project?
 1️⃣ Run both backend & frontend.
+
 2️⃣ Open http://localhost:3000/ in your browser.
+
 3️⃣ Select a doctor → Choose a date → Pick a time slot → Book appointment.
+
 4️⃣ Try to edit/cancel an existing booking.
+
