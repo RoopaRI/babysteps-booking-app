@@ -4,14 +4,14 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./BookingModal.css";
 import axios from "axios";
 
-const BookingModal = ({ doctor, selectedDate, setSelectedDate, slots, close }) => {
-  const [duration, setDuration] = useState(30); // Default duration
+const BookingModal = ({ doctor, selectedDate, setSelectedDate, slots, bookAppointment, close }) => {
   const [appointmentType, setAppointmentType] = useState("Routine Check-Up");
   const [patientName, setPatientName] = useState("");
   const [notes, setNotes] = useState("");
+  const [selectedSlot, setSelectedSlot] = useState(null);
 
   const handleBooking = async () => {
-    if (!selectedDate || !patientName || !appointmentType) {
+    if (!selectedDate || !selectedSlot || !patientName || !appointmentType) {
       alert("Please fill all required fields.");
       return;
     }
@@ -19,7 +19,7 @@ const BookingModal = ({ doctor, selectedDate, setSelectedDate, slots, close }) =
     const appointmentData = {
       doctorId: doctor._id,
       date: selectedDate,
-      duration,
+      time: selectedSlot,
       appointmentType,
       patientName,
       notes,
@@ -55,16 +55,28 @@ const BookingModal = ({ doctor, selectedDate, setSelectedDate, slots, close }) =
                 minDate={new Date()}
                 maxDate={new Date(new Date().setDate(new Date().getDate() + 7))}
                 className="form-control"
+                placeholderText="Choose a date"
               />
             </div>
 
-            {/* Appointment Duration */}
+            {/* Available Time Slots */}
             <div className="form-group">
-              <label>Duration (minutes):</label>
-              <select className="form-control" value={duration} onChange={(e) => setDuration(Number(e.target.value))}>
-                <option value={30}>30 minutes</option>
-                <option value={60}>60 minutes</option>
-              </select>
+              <label>Available Time Slots:</label>
+              <div className="slot-container">
+                {slots.length > 0 ? (
+                  slots.map((slot, index) => (
+                    <button
+                      key={index}
+                      className={`slot-button ${selectedSlot === slot ? "selected" : ""}`}
+                      onClick={() => setSelectedSlot(slot)}
+                    >
+                      {slot}
+                    </button>
+                  ))
+                ) : (
+                  <p className="text-danger">No available slots for this date.</p>
+                )}
+              </div>
             </div>
 
             {/* Appointment Type */}
@@ -96,7 +108,7 @@ const BookingModal = ({ doctor, selectedDate, setSelectedDate, slots, close }) =
             </div>
 
             {/* Submit Button */}
-            <button className="btn btn-primary mt-3" onClick={handleBooking}>
+            <button className="btn btn-primary mt-3" onClick={handleBooking} disabled={!selectedSlot}>
               Book Appointment
             </button>
           </div>

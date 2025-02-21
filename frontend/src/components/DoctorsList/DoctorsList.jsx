@@ -25,11 +25,13 @@ const DoctorsList = () => {
       });
   }, []);
 
+  // Fetch available slots when doctor and date are selected
   useEffect(() => {
     if (selectedDate && selectedDoctor) {
-      fetch(`http://localhost:5000/appointments/slots?doctorId=${selectedDoctor._id}&date=${selectedDate.toISOString()}`)
+      const formattedDate = selectedDate.toISOString().split("T")[0]; // Convert to YYYY-MM-DD format
+      fetch(`http://localhost:5000/doctors/${selectedDoctor._id}/slots?date=${formattedDate}`)
         .then((res) => res.json())
-        .then((data) => setAvailableSlots(data.slots))
+        .then((data) => setAvailableSlots(data.availableSlots || [])) // Ensure we handle empty slots properly
         .catch(() => setAvailableSlots([]));
     }
   }, [selectedDate, selectedDoctor]);
@@ -41,8 +43,8 @@ const DoctorsList = () => {
       body: JSON.stringify({
         doctorId: selectedDoctor._id,
         date: selectedDate,
-        time: slot
-      })
+        time: slot,
+      }),
     })
       .then((res) => res.json())
       .then(() => {
@@ -66,7 +68,6 @@ const DoctorsList = () => {
 
       {selectedDoctor && (
         <BookingModal
-          doctorId={selectedDoctor._id}
           doctor={selectedDoctor}
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}

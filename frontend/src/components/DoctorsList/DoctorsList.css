@@ -1,24 +1,70 @@
-
+/* Doctor Image Container */
 .doctor-image {
-    width: 100%; /* Makes the image responsive */
-    max-width: 180px; /* Default max width */
-    height: 150px; /* Fixed height */
-    object-fit: cover; /* Ensures image covers the given size without distortion */
+    width: 100%;
+    max-width: 180px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Hover effect: Subtle zoom & shadow */
+.doctor-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Larger screens adjustments */
+@media (min-width: 768px) {
+    .doctor-image {
+        max-width: 200px;
+        height: 180px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .doctor-image {
+        max-width: 250px;
+        height: 200px;
+    }
+}
+
+/* Styling for Doctor Cards */
+.card {
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-  }
-  
-  /* Adjust image size for larger screens */
-  @media (min-width: 768px) {
-    .doctor-image {
-      max-width: 200px;
-      height: 180px;
-    }
-  }
-  
-  @media (min-width: 1024px) {
-    .doctor-image {
-      max-width: 250px;
-      height: 200px;
-    }
-  }
-  
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Doctor name and specialization */
+.card-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.card-text {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Booking button */
+.btn-success {
+    background: #007bff;
+    border: none;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 6px;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-success:hover {
+    background: #0056b3;
+}

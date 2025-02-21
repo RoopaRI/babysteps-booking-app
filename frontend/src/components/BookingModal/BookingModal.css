@@ -1,73 +1,166 @@
-/* Modal background blur effect */
+/* Modal overlay with a glass effect */
 .modal {
-     position: fixed; 
-    
+    position: fixed;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Semi-transparent dark overlay */
-    backdrop-filter: blur(8px); /* Adds blur effect */
+    background: rgba(0, 0, 0, 0.4); /* Dark transparent overlay */
+    backdrop-filter: blur(6px); /* Adds subtle blur */
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all 0.3s ease-in-out;
 }
 
-/* Centering the modal */
+/* Modal container */
 .modal-dialog {
-    max-width: 500px; /* Adjust width as needed */
+    max-width: 500px;
     width: 90%;
     margin: 0 auto;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Modal content styling */
+/* Modal content with soft shadows */
 .modal-content {
     background: white;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s ease-in-out;
 }
 
-/* Header styles */
+/* Header styles with modern look */
 .modal-header {
-    background-color: blue;
+    background: #007bff; /* Primary color */
     color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 15px;
+    padding: 12px 18px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 }
 
 /* Close button */
 .modal-header button {
-    background: none;
+    background: transparent;
     border: none;
-    font-size: 20px;
+    font-size: 22px;
     cursor: pointer;
     color: white;
+    transition: all 0.2s ease-in-out;
 }
 
-/* Close button hover */
 .modal-header button:hover {
-    background-color: rgba(145, 236, 145, 0.7);
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 50%;
 }
 
-/* Modal body */
+/* Modal body styling */
 .modal-body {
-    color: blue;
+    color: #333;
 }
 
-/* Date selection row */
-.modal-date {
+/* Labels and input fields */
+.form-group label {
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Input focus effect */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Date Picker */
+.react-datepicker-wrapper {
+    width: 100%;
+}
+
+/* Slot selection container */
+.slot-container {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+/* Time slot button styling */
+.slot-button {
+    padding: 12px 15px;
+    border: 2px solid #007bff;
+    background: white;
+    color: #007bff;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+}
+
+.slot-button:hover {
+    background: #007bff;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Selected slot effect */
+.slot-button.selected {
+    background: #007bff;
+    color: white;
+    border-color: #0056b3;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+/* Booking button */
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    background: #007bff;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+    background: #0056b3;
 }
 
 /* Responsive adjustments */
 @media (max-width: 600px) {
     .modal-dialog {
         width: 95%;
+    }
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
