@@ -35,9 +35,9 @@ git clone https://github.com/your-repo.git
 cd backend
 npm install
 
-# 🔹 Configure .env File
+# 🔹 Configure .env File 
+Create a `.env` file in the backend folder and add:
 ```ini
-Create a .env file in the backend folder and add:
 MONGO_URI=your_mongodb_connection_string
 PORT=5000
 
@@ -62,41 +62,48 @@ npm start
 ✅ Frontend will run at: http://localhost:3000/
 
 # 📌 API Endpoints
-# 🔹 Doctors API
-| Column | Column | Column |
-Method	            Endpoint	                                       Description
-GET	                /doctors	                                       Fetch all doctors
-GET	                /doctors/:id/slots?date=YYYY-MM-DD	               Get available slots for a doctor
-| Column | Column | Column |
-# 🔹 Appointments API
-Method	            Endpoint	                                       Description
-GET	                /appointments	                                   Fetch all appointments
-POST	            /appointments	                                   Book an appointment
-PUT	                /appointments/:id	                               Update appointment (date/time)
-DELETE	            /appointments/:id	                               Cancel an appointment
 
-# ** ⚡ Assumptions & Design Decisions**
-1️⃣ Doctor Availability
-✔️ Working hours are stored in MongoDB.
-✔️ Time slots are generated dynamically based on the doctor’s availability and interval duration.
-✔️ Slots get filtered based on existing bookings.
+## 🔹 Doctors API
+| **Method** | **Endpoint**                            | **Description**                    |
+|-----------|----------------------------------------|------------------------------------|
+| GET       | `/doctors`                             | Fetch all doctors                 |
+| GET       | `/doctors/:id/slots?date=YYYY-MM-DD`   | Get available slots for a doctor  |
 
-2️⃣ Booking Conflicts
-✔️ Before confirming an appointment, the backend checks for overlapping bookings.
-✔️ If a time slot is already taken, an error is returned.
+## 🔹 Appointments API
+| **Method** | **Endpoint**            | **Description**                        |
+|-----------|------------------------|----------------------------------------|
+| GET       | `/appointments`          | Fetch all appointments                 |
+| POST      | `/appointments`          | Book an appointment                    |
+| PUT       | `/appointments/:id`      | Update appointment (date/time)         |
+| DELETE    | `/appointments/:id`      | Cancel an appointment                  |
 
-3️⃣ Patient Name Validation
-✔️ Only alphabets & spaces allowed (no numbers or special characters).
 
-4️⃣ Time Slot Selection
-✔️ Users can only pick slots in 30-minute intervals.
+# ⚡ Assumptions & Design Decisions
 
-5️⃣ Editable Appointments
-✔️ Users can update both date & time for existing bookings.
+## 1️⃣ Doctor Availability
+✔️ Working hours are stored in MongoDB.  
+✔️ Time slots are generated dynamically based on the doctor’s availability and interval duration.  
+✔️ Slots get filtered based on existing bookings.  
 
-# **🔥 How to Test the Project?**
-1️⃣ Run both backend & frontend.
-2️⃣ Open http://localhost:3000/ in your browser.
-3️⃣ Select a doctor → Choose a date → Pick a time slot → Book appointment.
-4️⃣ Try to edit/cancel an existing booking.
+## 2️⃣ Booking Conflicts
+✔️ Before confirming an appointment, the backend checks for overlapping bookings.  
+✔️ If a time slot is already taken, an error is returned.  
+
+## 3️⃣ Patient Name Validation
+✔️ Only alphabets & spaces allowed (no numbers or special characters).  
+
+## 4️⃣ Time Slot Selection
+✔️ Users can only pick slots in 30-minute intervals.  
+
+## 5️⃣ Editable Appointments
+✔️ Users can update both date & time for existing bookings.  
+
+---
+
+# 🔥 How to Test the Project?
+1️⃣ Run both backend & frontend.  
+2️⃣ Open **[http://localhost:3000/](http://localhost:3000/)** in your browser.  
+3️⃣ **Select a doctor → Choose a date → Pick a time slot → Book appointment.**  
+4️⃣ **Try to edit/cancel an existing booking.**  
+
 
