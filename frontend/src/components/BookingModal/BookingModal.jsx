@@ -9,10 +9,11 @@ const BookingModal = ({ doctor, selectedDate, setSelectedDate, slots, bookAppoin
   const [patientName, setPatientName] = useState("");
   const [notes, setNotes] = useState("");
   const [selectedSlot, setSelectedSlot] = useState(null);
+  const [duration, setDuration] = useState(30); // ✅ Default duration
 
   const handleBooking = async () => {
     if (!selectedDate || !selectedSlot || !patientName || !appointmentType) {
-      alert("Please fill all required fields.");
+      alert("⚠️ Please fill all required fields.");
       return;
     }
 
@@ -20,18 +21,21 @@ const BookingModal = ({ doctor, selectedDate, setSelectedDate, slots, bookAppoin
       doctorId: doctor._id,
       date: selectedDate,
       time: selectedSlot,
+      duration, // ✅ Ensure duration is included
       appointmentType,
       patientName,
       notes,
     };
 
+    console.log("📤 Sending Request:", appointmentData); // Debugging log
+
     try {
       const response = await axios.post("http://localhost:5000/appointments", appointmentData);
-      alert(response.data.message);
+      alert("✅ " + response.data.message);
       close(); // Close modal after booking
     } catch (error) {
-      console.error("Error booking appointment:", error);
-      alert("Failed to book appointment");
+      console.error("❌ Error booking appointment:", error.response?.data || error);
+      alert("🚨 Failed to book appointment: " + (error.response?.data.error || "Unknown error"));
     }
   };
 
@@ -77,6 +81,15 @@ const BookingModal = ({ doctor, selectedDate, setSelectedDate, slots, bookAppoin
                   <p className="text-danger">No available slots for this date.</p>
                 )}
               </div>
+            </div>
+
+            {/* Appointment Duration */}
+            <div className="form-group">
+              <label>Duration (minutes):</label>
+              <select className="form-control" value={duration} onChange={(e) => setDuration(Number(e.target.value))}>
+                <option value={30}>30 minutes</option>
+                <option value={60}>60 minutes</option>
+              </select>
             </div>
 
             {/* Appointment Type */}

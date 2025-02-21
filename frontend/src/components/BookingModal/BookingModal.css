@@ -60,6 +60,10 @@
     color: #333;
 }
 
+.text-danger{
+    font-size: smaller;
+}
+
 /* Labels and input fields */
 .form-group label {
     font-weight: 600;

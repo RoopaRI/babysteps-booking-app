@@ -14,33 +14,42 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Create a new appointment
+// Create a new appointment (Fixed conflict check)
 router.post("/", async (req, res) => {
   try {
-    const { doctorId, date, duration, appointmentType, patientName, notes } = req.body;
+    console.log("📥 Received Data:", req.body); // Log incoming data
+    const { doctorId, date, time, duration, appointmentType, patientName, notes } = req.body;
 
-    if (!doctorId || !date || !duration || !appointmentType || !patientName)
+    if (!doctorId || !date || !time || !appointmentType || !patientName) {
+      console.log("❌ Missing Fields:", { doctorId, date, time, appointmentType, patientName });
       return res.status(400).json({ error: "All fields except notes are required." });
+    }
 
     const doctor = await Doctor.findById(doctorId);
     if (!doctor) return res.status(404).json({ error: "Doctor not found" });
 
     const appointmentDate = new Date(date);
-    const overlappingAppointment = await Appointment.findOne({
+    appointmentDate.setUTCHours(0, 0, 0, 0); // Normalize to remove time inconsistencies
+
+    // 🛑 Check for existing appointment at the exact date and time slot
+    const existingAppointment = await Appointment.findOne({
       doctorId,
-      $and: [
-        { date: { $gte: appointmentDate, $lt: new Date(appointmentDate.getTime() + duration * 60000) } },
-        { time: appointmentDate.toTimeString().slice(0, 5) },
-      ],
+      date: appointmentDate, // Match the exact date
+      time: time // Match the selected time slot
     });
 
-    if (overlappingAppointment) return res.status(400).json({ error: "Time slot already booked for this doctor" });
+    if (existingAppointment) {
+      console.log("❌ Conflict: Time slot already booked!", existingAppointment);
+      return res.status(400).json({ error: "Time slot already booked for this doctor" });
+    }
 
-    const newAppointment = new Appointment({ doctorId, date: appointmentDate, duration, appointmentType, patientName, notes });
+    // ✅ No conflicts, proceed with booking
+    const newAppointment = new Appointment({ doctorId, date: appointmentDate, time, duration, appointmentType, patientName, notes });
     await newAppointment.save();
 
     console.log("✅ Appointment saved:", newAppointment);
     res.status(201).json({ message: "Appointment booked successfully!", appointment: newAppointment });
+
   } catch (error) {
     console.error("❌ Error booking appointment:", error);
     res.status(500).json({ error: "Error booking appointment" });
