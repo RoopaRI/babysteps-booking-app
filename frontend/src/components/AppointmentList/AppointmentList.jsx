@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import API_BASE_URL from "../config"; // Import API base URL
 
 const AppointmentsList = () => {
   const [appointments, setAppointments] = useState([]);
@@ -13,7 +14,7 @@ const AppointmentsList = () => {
 
   const fetchAppointments = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/appointments");
+      const res = await axios.get(`${API_BASE_URL}/appointments`);
       setAppointments(res.data);
     } catch (error) {
       alert("Failed to fetch appointments");
@@ -22,7 +23,7 @@ const AppointmentsList = () => {
 
   const cancelAppointment = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/appointments/${id}`);
+      await axios.delete(`${API_BASE_URL}/appointments/${id}`);
       setAppointments((prev) => prev.filter((appt) => appt._id !== id));
     } catch (error) {
       alert("Failed to cancel appointment");
@@ -36,7 +37,7 @@ const AppointmentsList = () => {
     }
 
     try {
-      const res = await axios.put(`http://localhost:5000/appointments/${id}`, {
+      await axios.put(`${API_BASE_URL}/appointments/${id}`, {
         date: updatedDate,
         time: updatedTime,
       });

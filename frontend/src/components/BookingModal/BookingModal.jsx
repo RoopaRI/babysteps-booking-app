@@ -3,6 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./BookingModal.css";
 import axios from "axios";
+import API_BASE_URL from "../config"; // Import API base URL
 
 const BookingModal = ({ doctor, selectedDate, setSelectedDate, slots, bookAppointment, close }) => {
   const [appointmentType, setAppointmentType] = useState("Routine Check-Up");
@@ -38,7 +39,7 @@ const BookingModal = ({ doctor, selectedDate, setSelectedDate, slots, bookAppoin
     console.log("📤 Sending Request:", appointmentData); // Debugging log
 
     try {
-      const response = await axios.post("http://localhost:5000/appointments", appointmentData);
+      const response = await axios.post(`${API_BASE_URL}/appointments`, appointmentData);
       alert("✅ " + response.data.message);
       close(); // Close modal after booking
     } catch (error) {

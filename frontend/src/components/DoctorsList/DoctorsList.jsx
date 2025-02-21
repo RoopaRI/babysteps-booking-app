@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./DoctorsList.css";
 import DoctorCard from "../DoctorCard/DoctorCard";
 import BookingModal from "../BookingModal/BookingModal";
+import API_BASE_URL from "../config"; // Import API base URL
 
 const DoctorsList = () => {
   const [doctors, setDoctors] = useState([]);
@@ -13,7 +14,7 @@ const DoctorsList = () => {
   const [availableSlots, setAvailableSlots] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/doctors")
+    fetch(`${API_BASE_URL}/doctors`)
       .then((response) => response.json())
       .then((data) => {
         setDoctors(data);
@@ -29,7 +30,7 @@ const DoctorsList = () => {
   useEffect(() => {
     if (selectedDate && selectedDoctor) {
       const formattedDate = selectedDate.toISOString().split("T")[0]; // Convert to YYYY-MM-DD format
-      fetch(`http://localhost:5000/doctors/${selectedDoctor._id}/slots?date=${formattedDate}`)
+      fetch(`${API_BASE_URL}/doctors/${selectedDoctor._id}/slots?date=${formattedDate}`)
         .then((res) => res.json())
         .then((data) => setAvailableSlots(data.availableSlots || [])) // Ensure we handle empty slots properly
         .catch(() => setAvailableSlots([]));
@@ -37,7 +38,7 @@ const DoctorsList = () => {
   }, [selectedDate, selectedDoctor]);
 
   const bookAppointment = (slot) => {
-    fetch("http://localhost:5000/appointments", {
+    fetch(`${API_BASE_URL}/appointments`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
