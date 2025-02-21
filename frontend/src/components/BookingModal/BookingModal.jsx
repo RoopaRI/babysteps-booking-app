@@ -10,8 +10,16 @@ const BookingModal = ({ doctor, selectedDate, setSelectedDate, slots, bookAppoin
   const [notes, setNotes] = useState("");
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [duration, setDuration] = useState(30); // ✅ Default duration
+  const [nameError, setNameError] = useState(""); // ✅ Patient name validation error state
 
   const handleBooking = async () => {
+    // ✅ Patient Name Validation: Only alphabets and spaces allowed
+    const nameRegex = /^[A-Za-z\s]+$/;
+    if (!nameRegex.test(patientName)) {
+      setNameError("⚠️ Patient name should only contain alphabets.");
+      return;
+    }
+
     if (!selectedDate || !selectedSlot || !patientName || !appointmentType) {
       alert("⚠️ Please fill all required fields.");
       return;
@@ -109,9 +117,13 @@ const BookingModal = ({ doctor, selectedDate, setSelectedDate, slots, bookAppoin
                 type="text"
                 className="form-control"
                 value={patientName}
-                onChange={(e) => setPatientName(e.target.value)}
+                onChange={(e) => {
+                  setPatientName(e.target.value);
+                  setNameError(""); // ✅ Clear error when user types
+                }}
                 required
               />
+              {nameError && <p className="text-danger">{nameError}</p>} {/* ✅ Show error message if invalid */}
             </div>
 
             {/* Notes */}
